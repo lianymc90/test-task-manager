@@ -1,0 +1,38 @@
+
+<div cdkDropListGroup>
+  @for (item of status; track item) {
+  <div class="example-container">
+    <h2>{{ item }}</h2>
+    <hr />
+    <button mat-raised-button class="bottom-add" (click)="openDialog($index)" name="bottomAdd">+ Add Task</button>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="taskGroup[$index]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (task of taskGroup[$index]; track task; let i = $index) {
+        <div class="example-box" cdkDrag>
+          <div class="box-display">
+            {{ task.createdAt  | date: 'dd/MM/yyyy'}}
+            <span>
+              <button mat-icon-button color="primary" (click)="openDialogEdit(task, $index, i)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="delete(taskGroup[$index], i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </span>
+          </div>
+
+          <div class="box-display">
+            <h3><span style="font-weight: bold">Title:</span> {{ task.title }}</h3>
+          </div>
+
+        </div>
+        }
+    </div>
+  </div>
+  }
+
+</div>

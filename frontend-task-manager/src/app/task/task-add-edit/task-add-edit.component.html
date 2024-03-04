@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{!data.id ? 'Create Task' : 'Edit Task'}}</h2>
+<mat-dialog-content>
+  <form #taskForm="ngForm" name="taskForm">
+    <div class="form-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" [(ngModel)]="data.title" name="title" #title="ngModel" required>
+        @if (title.invalid && (title.dirty || title.touched)) {
+          <mat-error>{{getErrorMessage(title)}}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput matInputplaceholder="Description" rows="5" [(ngModel)]="data.description" name="description"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select status</mat-label>
+        <mat-select [(ngModel)]="data.status" name="status">
+          @for (item of status; track item; let i = $index){
+            <mat-option value="{{item}}">{{item}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div>
+        @if (data.updatedAt) {
+          <p>Updated: {{data.updatedAt | date: 'medium'}}</p>
+        }
+      </div>
+    </div>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" disabled="{{taskForm.invalid}}" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</mat-dialog-actions>
