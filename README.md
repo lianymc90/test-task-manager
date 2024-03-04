@@ -1,4 +1,7 @@
 # Spring Boot, Angular, PostgreSQL Application
+<p align="center">
+  <img src="task manager video.gif" width="683" />
+</p>
 
 This repository contains a complete web application consisting of a backend developed with Spring Boot, a frontend 
 developed with Angular, and a PostgreSQL database. The application runs in Docker containers and is 
